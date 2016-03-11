@@ -1,4 +1,4 @@
-package org.alfaseo.notforgetix;
+package org.alfaseo.notforgetix.fragment;
 
 
 import android.os.AsyncTask;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.alfaseo.notforgetix.R;
 
 import java.util.concurrent.TimeUnit;
 

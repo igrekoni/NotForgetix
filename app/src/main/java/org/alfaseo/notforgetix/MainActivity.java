@@ -3,8 +3,11 @@ package org.alfaseo.notforgetix;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.alfaseo.notforgetix.fragment.SplashFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,9 +55,18 @@ public class MainActivity extends AppCompatActivity {
             SplashFragment splashFragment = new SplashFragment();
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, splashFragment)
+                    .replace(R.id.content_frame, splashFragment)
                     .addToBackStack(null)
                     .commit();
         }
     }
+
+    private void setUi(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+            setSupportActionBar(toolbar);
+        }
+    }
+
 }
