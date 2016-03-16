@@ -3,13 +3,19 @@ package org.alfaseo.notforgetix.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import org.alfaseo.notforgetix.R;
+import org.alfaseo.notforgetix.Utils;
+
+import java.util.Calendar;
 
 /**
  * Created by Gre on 15.03.2016.
@@ -31,16 +37,67 @@ public class AddingTaskDialogFragment extends DialogFragment {
         EditText etTitle = tilTitle.getEditText();
 
         TextInputLayout tilDate = (TextInputLayout) container.findViewById(R.id.tilDialogTaskDate);
-        EditText etDate = tilDate.getEditText();
+        final EditText etDate = tilDate.getEditText();
 
         TextInputLayout tilTime = (TextInputLayout) container.findViewById(R.id.tilDialogTaskTime);
-        EditText etTime = tilTime.getEditText();
+        final EditText etTime = tilTime.getEditText();
 
         tilTitle.setHint(getResources().getString(R.string.task_title));
         tilDate.setHint(getResources().getString(R.string.task_date));
         tilTime.setHint(getResources().getString(R.string.task_time));
 
         builder.setView(container);
+
+
+
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etDate.length() == 0) {
+                    etDate.setText(" ");
+                }
+
+
+                DialogFragment datePickerFragment = new DatePickerFragment() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar dateCalendar = Calendar.getInstance();
+                        dateCalendar.set(year, monthOfYear, dayOfMonth);
+                        etDate.setText(Utils.getDate(dateCalendar.getTimeInMillis()));
+                    }
+
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        etDate.setText(null);
+                    }
+                };
+                datePickerFragment.show(getFragmentManager(), "DatePickerFragment");
+            }
+        });
+
+
+        etTime.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (etTime.length() == 0){
+                    etTime.setText(" ");
+                }
+                DialogFragment timePickerFragment = new TimePickerFragment(){
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        Calendar timeCalendar = Calendar.getInstance();
+                        timeCalendar.set(0,0,0,hourOfDay, minute);
+                        etTime.setText(Utils.getTime(timeCalendar.getTimeInMillis()));
+                    }
+
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        etTime.setText(null);
+                    }
+                };
+            }
+        });
+
 
 
 
