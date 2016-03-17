@@ -1,6 +1,8 @@
 package org.alfaseo.notforgetix.adapter;
 
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v13.app.FragmentStatePagerAdapter;
 
 import org.alfaseo.notforgetix.fragment.CurrentTaskFragment;
 import org.alfaseo.notforgetix.fragment.DoneTaskFragment;
@@ -13,14 +15,14 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
     private int numberOfTabs;
 
-    public TabAdapter(android.support.v4.app.FragmentManager fm, int numberOfTabs) {
+    public TabAdapter(FragmentManager fm, int numberOfTabs) {
         super(fm);
         this.numberOfTabs = numberOfTabs;
     }
 
 
     @Override
-    public android.support.v4.app.Fragment getItem(int i) {
+    public Fragment getItem(int i) {
 
         switch (i) {
             case 0:
