@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.alfaseo.notforgetix.adapter.TabAdapter;
 import org.alfaseo.notforgetix.dialog.AddingTaskDialogFragment;
 import org.alfaseo.notforgetix.fragment.SplashFragment;
+import org.alfaseo.notforgetix.model.ModelTask;
 
 //import android.support.v4.app.FragmentManager;
 //import android.support.v4.app.Fragment;
@@ -123,12 +124,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTaskAdded() {
+    public void onTaskAdded(ModelTask newTask) {
         Toast.makeText(this, "Task were added", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onTaskAddingCancel() {
-        Toast.makeText(this, "Adding canceled", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show();
     }
 }
