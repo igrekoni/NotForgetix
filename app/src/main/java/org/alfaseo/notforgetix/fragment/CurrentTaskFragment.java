@@ -57,12 +57,15 @@ public class CurrentTaskFragment extends Fragment {
                 ModelTask task = (ModelTask) adapter.getItem(i);
                 if (newTask.getDate() < task.getDate()){
                     position = i;
+                    break;
                 }
             }
         }
 
         if (position != -1) {
             adapter.addItem(position, newTask);
+        } else {
+            adapter.addItem(newTask);
         }
     }
 
