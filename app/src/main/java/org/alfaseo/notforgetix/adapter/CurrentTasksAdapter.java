@@ -8,35 +8,20 @@ import android.widget.TextView;
 
 import org.alfaseo.notforgetix.R;
 import org.alfaseo.notforgetix.Utils;
+import org.alfaseo.notforgetix.fragment.CurrentTaskFragment;
 import org.alfaseo.notforgetix.model.Item;
 import org.alfaseo.notforgetix.model.ModelTask;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Gre on 18.03.2016.
  */
-public class CurrentTasksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    List<Item> items = new ArrayList<>();
+public class CurrentTasksAdapter extends TaskAdapter {
 
     private static final int TYPE_TASK = 0;
     private static final int TYPE_SEPARATOR = 1;
 
-
-    public Item getItem(int position){
-        return items.get(position);
-    }
-
-    public void addItem(Item item){
-        items.add(item);
-        notifyItemInserted(getItemCount() - 1);
-    }
-
-    public void addItem(int location, Item item){
-        items.add(location, item);
-        notifyItemInserted(location);
+    public CurrentTasksAdapter(CurrentTaskFragment taskFragment) {
+        super(taskFragment);
     }
 
 
@@ -77,11 +62,6 @@ public class CurrentTasksAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
-
     public int getItemViewType(int position){
         if (getItem(position).isTask()){
             return TYPE_TASK;
@@ -90,17 +70,5 @@ public class CurrentTasksAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-
-    private class TaskViewHolder extends RecyclerView.ViewHolder{
-
-        TextView title;
-        TextView date;
-
-        public TaskViewHolder(View itemView, TextView title, TextView date) {
-            super(itemView);
-            this.title = title;
-            this.date = date;
-        }
-    }
 
 }

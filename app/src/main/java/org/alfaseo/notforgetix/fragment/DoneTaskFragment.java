@@ -11,16 +11,11 @@ import android.view.ViewGroup;
 
 import org.alfaseo.notforgetix.R;
 
-//import android.support.v4.app.Fragment;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DoneTaskFragment extends Fragment {
-
-    RecyclerView rvDoneTasks;
-    RecyclerView.LayoutManager layoutManager;
+public class DoneTaskFragment extends TaskFragment {
 
 
     public DoneTaskFragment() {
@@ -34,8 +29,11 @@ public class DoneTaskFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_done_task, container, false);
 
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.rvDoneTask);
+
         layoutManager = new LinearLayoutManager(getActivity());
-        rvDoneTasks = (RecyclerView) rootView.findViewById(R.id.rvDoneTask);
+        recyclerView.setLayoutManager(layoutManager);
+
 
         // Inflate the layout for this fragment
         return rootView;
