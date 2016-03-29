@@ -14,25 +14,30 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.alfaseo.notforgetix.adapter.TabAdapter;
+import org.alfaseo.notforgetix.database.DBHelper;
 import org.alfaseo.notforgetix.dialog.AddingTaskDialogFragment;
 import org.alfaseo.notforgetix.fragment.CurrentTaskFragment;
 import org.alfaseo.notforgetix.fragment.DoneTaskFragment;
 import org.alfaseo.notforgetix.fragment.SplashFragment;
+import org.alfaseo.notforgetix.fragment.TaskFragment;
 import org.alfaseo.notforgetix.model.ModelTask;
 
 
 
 
 public class MainActivity extends AppCompatActivity
-        implements AddingTaskDialogFragment.AddingTaskListener {
+        implements AddingTaskDialogFragment.AddingTaskListener,
+        CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener {
 
     FragmentManager fragmentManager;
-    PreferenceHelper preferenceHelper;
 
+    PreferenceHelper preferenceHelper;
     TabAdapter tabAdapter;
 
-    CurrentTaskFragment currentTaskFragment;
-    DoneTaskFragment doneTaskFragment;
+    TaskFragment currentTaskFragment;
+    TaskFragment doneTaskFragment;
+
+    public DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +47,18 @@ public class MainActivity extends AppCompatActivity
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
 
+        dbHelper = new DBHelper(getApplicationContext());
 
         fragmentManager = getFragmentManager();
 
         runSplash();
 
-        setUi();
+        setUI();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem splashItem = menu.findItem(R.id.action_splash);
         splashItem.setChecked(preferenceHelper.getBoolean(PreferenceHelper.SPLASH_IS_INVISIBLE));
@@ -60,8 +67,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_splash) {
             item.setChecked(!item.isChecked());
             preferenceHelper.putBoolean(PreferenceHelper.SPLASH_IS_INVISIBLE, item.isChecked());
@@ -71,8 +82,8 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void runSplash(){
-        if (!preferenceHelper.getBoolean(PreferenceHelper.SPLASH_IS_INVISIBLE)) {
+    public void runSplash() {
+        if(!preferenceHelper.getBoolean(PreferenceHelper.SPLASH_IS_INVISIBLE)) {
             SplashFragment splashFragment = new SplashFragment();
 
             fragmentManager.beginTransaction()
@@ -80,9 +91,11 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(null)
                     .commit();
         }
+
     }
 
-    private void setUi(){
+    private void setUI() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -114,11 +127,13 @@ public class MainActivity extends AppCompatActivity
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
+
+
         });
 
         currentTaskFragment = (CurrentTaskFragment) tabAdapter.getItem(TabAdapter.CURRENT_TASK_FRAGMENT_POSITION);
         doneTaskFragment = (DoneTaskFragment) tabAdapter.getItem(TabAdapter.DONE_TASK_FRAGMENT_POSITION);
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -126,19 +141,29 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 DialogFragment addingTaskDialogFragment = new AddingTaskDialogFragment();
-                addingTaskDialogFragment.show(fragmentManager, "bliat");
+                addingTaskDialogFragment.show(fragmentManager, "AddingTaskDialogFragment");
             }
         });
-
     }
 
     @Override
     public void onTaskAdded(ModelTask newTask) {
-        currentTaskFragment.addTask(newTask);
+        currentTaskFragment.addTask(newTask, true);
     }
 
     @Override
     public void onTaskAddingCancel() {
-        Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Task adding cancel", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onTaskDone(ModelTask task) {
+        doneTaskFragment.addTask(task, false);
+    }
+
+    @Override
+    public void onTaskRestore(ModelTask task) {
+        currentTaskFragment.addTask(task, false);
     }
 }

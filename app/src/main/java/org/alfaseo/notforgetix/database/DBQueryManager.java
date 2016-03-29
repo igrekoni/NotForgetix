@@ -11,20 +11,20 @@ import java.util.List;
 /**
  * Created by Gre on 28.03.2016.
  */
-public class DBQuerryManager {
+public class DBQueryManager {
 
     private SQLiteDatabase database;
 
-    DBQuerryManager(SQLiteDatabase database){
+    DBQueryManager(SQLiteDatabase database) {
         this.database = database;
     }
 
-    public List<ModelTask> getTasks(String selection, String[] selectionArgs, String orderBy){
+    public List<ModelTask> getTasks(String selection, String[] selectionArgs, String orderBy) {
         List<ModelTask> tasks = new ArrayList<>();
 
         Cursor c = database.query(DBHelper.TASKS_TABLE, null, selection, selectionArgs, null, null, orderBy);
 
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             do {
                 String title = c.getString(c.getColumnIndex(DBHelper.TASK_TITLE_COLUMN));
                 long date = c.getLong(c.getColumnIndex(DBHelper.TASK_DATE_COLUMN));
@@ -40,5 +40,4 @@ public class DBQuerryManager {
 
         return tasks;
     }
-
 }

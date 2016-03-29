@@ -12,11 +12,10 @@ import org.alfaseo.notforgetix.fragment.DoneTaskFragment;
  */
 public class TabAdapter extends FragmentStatePagerAdapter {
 
-
     private int numberOfTabs;
 
-    public static final int CURRENT_TASK_FRAGMENT_POSITION =0;
-    public static final int DONE_TASK_FRAGMENT_POSITION =1;
+    public static final int CURRENT_TASK_FRAGMENT_POSITION = 0;
+    public static final int DONE_TASK_FRAGMENT_POSITION = 1;
 
     private CurrentTaskFragment currentTaskFragment;
     private DoneTaskFragment doneTaskFragment;
@@ -27,7 +26,6 @@ public class TabAdapter extends FragmentStatePagerAdapter {
         currentTaskFragment = new CurrentTaskFragment();
         doneTaskFragment = new DoneTaskFragment();
     }
-
 
     @Override
     public Fragment getItem(int i) {
