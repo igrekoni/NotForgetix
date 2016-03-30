@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NotForgetix</string>
+    <string name="action_splash">Отключить SplashScreen</string>
+    <string name="action_settings">Настройки</string>
+    <string name="current_task">Активные</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="dialog_ok">ОК</string>
+    <string name="dialog_removing_message">Удалить задачу?</string>
+    <string name="dialog_error_empty">Пожалуйста, введите заголовок</string>
+    <string name="dialog_title">Добавление задачи</string>
+    <string name="done_task">Выполненные</string>
+    <string name="removed">Удалено</string>
+    <string name="task_date">Дата</string>
+    <string name="task_time">Время</string>
+    <string name="task_title">Заголовок</string>
+</resources>
