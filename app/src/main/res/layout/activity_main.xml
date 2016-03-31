@@ -32,7 +32,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways">
 
-            <android.support.v7.widget.SearchView.SearchAutoComplete
+            <android.support.v7.widget.SearchView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/search_view"
