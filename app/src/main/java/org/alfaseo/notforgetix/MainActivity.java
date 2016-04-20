@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.alfaseo.notforgetix.adapter.TabAdapter;
+import org.alfaseo.notforgetix.alarm.AlarmHelper;
 import org.alfaseo.notforgetix.database.DBHelper;
 import org.alfaseo.notforgetix.dialog.AddingTaskDialogFragment;
 import org.alfaseo.notforgetix.fragment.CurrentTaskFragment;
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
 
+        AlarmHelper.getInstance().init(getApplicationContext());
+
+
         dbHelper = new DBHelper(getApplicationContext());
 
         fragmentManager = getFragmentManager();
@@ -57,6 +61,18 @@ public class MainActivity extends AppCompatActivity
         runSplash();
 
         setUI();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        MyApplication.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyApplication.activityPaused();
     }
 
     @Override

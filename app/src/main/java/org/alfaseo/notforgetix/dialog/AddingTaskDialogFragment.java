@@ -21,6 +21,7 @@ import android.widget.TimePicker;
 
 import org.alfaseo.notforgetix.R;
 import org.alfaseo.notforgetix.Utils;
+import org.alfaseo.notforgetix.alarm.AlarmHelper;
 import org.alfaseo.notforgetix.model.ModelTask;
 
 import java.util.Calendar;
@@ -152,8 +153,13 @@ public class AddingTaskDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 task.setTitle(etTitle.getText().toString());
+                task.setStatus(ModelTask.STATUS_CURRENT);
                 if (etDate.length() != 0 || etTime.length() != 0) {
                     task.setDate(calendar.getTimeInMillis());
+
+                    AlarmHelper alarmHelper = AlarmHelper.getInstance();
+                    alarmHelper.setAlarm(task);
+
                 }
                 task.setStatus(ModelTask.STATUS_CURRENT);
                 addingTaskListener.onTaskAdded(task);

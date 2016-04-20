@@ -11,6 +11,7 @@ import android.view.View;
 import org.alfaseo.notforgetix.MainActivity;
 import org.alfaseo.notforgetix.R;
 import org.alfaseo.notforgetix.adapter.TaskAdapter;
+import org.alfaseo.notforgetix.alarm.AlarmHelper;
 import org.alfaseo.notforgetix.model.Item;
 import org.alfaseo.notforgetix.model.ModelTask;
 
@@ -25,6 +26,8 @@ public abstract class TaskFragment extends Fragment {
 
     public MainActivity activity;
 
+    public AlarmHelper alarmHelper;
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public abstract class TaskFragment extends Fragment {
         if (getActivity() != null) {
             activity = (MainActivity) getActivity();
         }
+
+        alarmHelper = AlarmHelper.getInstance();
 
         addTaskFromDB();
     }
@@ -99,6 +104,7 @@ public abstract class TaskFragment extends Fragment {
                         @Override
                         public void onViewDetachedFromWindow(View v) {
                             if (isRemoved[0]){
+                                alarmHelper.removeAlarm(timeStamp);
                                 activity.dbHelper.removeTask(timeStamp);
                             }
                         }
