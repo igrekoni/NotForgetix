@@ -18,6 +18,10 @@
     <string name="dialog_removing_message">Delete task?</string>
     <string name="removed">Removed</string>
 
+    <string name="separator_overue">Overdue</string>
+    <string name="separator_today">Today</string>
+    <string name="separator_tomorrow">Tomorrow</string>
+    <string name="separator_future">Future</string>
 
 
 
