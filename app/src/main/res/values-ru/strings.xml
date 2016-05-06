@@ -18,4 +18,5 @@
     <string name="separator_overue">Просроченные</string>
     <string name="separator_today">Сегодня</string>
     <string name="separator_tomorrow">Завтра</string>
+    <string name="dialog_editing_title">Редактирование задачи</string>
 </resources>

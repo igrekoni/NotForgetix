@@ -18,6 +18,7 @@ import org.alfaseo.notforgetix.adapter.TabAdapter;
 import org.alfaseo.notforgetix.alarm.AlarmHelper;
 import org.alfaseo.notforgetix.database.DBHelper;
 import org.alfaseo.notforgetix.dialog.AddingTaskDialogFragment;
+import org.alfaseo.notforgetix.dialog.EditTaskDialogFragment;
 import org.alfaseo.notforgetix.fragment.CurrentTaskFragment;
 import org.alfaseo.notforgetix.fragment.DoneTaskFragment;
 import org.alfaseo.notforgetix.fragment.SplashFragment;
@@ -29,7 +30,8 @@ import org.alfaseo.notforgetix.model.ModelTask;
 
 public class MainActivity extends AppCompatActivity
         implements AddingTaskDialogFragment.AddingTaskListener,
-        CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener {
+        CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener,
+        EditTaskDialogFragment.EditingTaskListener {
 
     FragmentManager fragmentManager;
 
@@ -199,5 +201,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onTaskRestore(ModelTask task) {
         currentTaskFragment.addTask(task, false);
+    }
+
+    @Override
+    public void onTaskEdited(ModelTask updatedTask) {
+        currentTaskFragment.updateTask(updatedTask);
+        dbHelper.update().task(updatedTask);
     }
 }
