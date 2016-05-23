@@ -85,6 +85,14 @@ public class CurrentTaskFragment extends TaskFragment {
     }
 
     @Override
+    public void checkAdapter() {
+        if (adapter == null) {
+            adapter = new CurrentTasksAdapter(this);
+            addTaskFromDB();
+        }
+    }
+
+    @Override
     public void addTaskFromDB() {
 
         adapter.removeAllItems();
