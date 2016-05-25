@@ -15,4 +15,13 @@
     </style>
 
 
+
+    <style name="EditTextHint" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@android:color/holo_green_dark</item>
+        <item name="android:textColorHint">@android:color/holo_green_dark</item>
+        <item name="colorControlNormal">@android:color/holo_green_dark</item>
+        <item name="colorControlActivated">@color/primary_text_default_material_light</item>
+        <item name="colorControlHighlight">@color/primary_text_default_material_light</item>
+    </style>
+
 </resources>

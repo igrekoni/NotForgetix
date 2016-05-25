@@ -7,7 +7,7 @@
     <string name="done_task">Done</string>
 
 
-    <string name="dialog_title">Adding Task</string>
+    <string name="dialog_title">New task</string>
     <string name="dialog_editing_title">Edit Task</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
@@ -20,14 +20,10 @@
     <string name="dialog_removing_message">Delete task?</string>
     <string name="removed">Removed</string>
 
-    <string name="separator_overue">Overdue</string>
+    <string name="separator_overdue">Overdue</string>
     <string name="separator_today">Today</string>
     <string name="separator_tomorrow">Tomorrow</string>
     <string name="separator_future">Future</string>
 
-
     <string name="banner_ad_unit">ca-app-pub-8897653303767582/3965778752</string>
-
-
-
 </resources>
