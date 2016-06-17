@@ -17,10 +17,10 @@
         android:id="@+id/tvTaskTitle"
         android:textSize="16sp"
         android:textColor="@color/primary_text_default_material_light"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginLeft="72dp"
-        android:layout_toRightOf="@+id/tvTaskDate"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -30,9 +30,8 @@
         android:gravity="right"
         android:textSize="14sp"
         android:textColor="@color/secondary_text_default_material_light"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:layout_margin="16dp"/>
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="16dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cvTaskPriority"
